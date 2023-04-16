@@ -1,6 +1,5 @@
 import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewPost } from "../../Actions/Post";
 import { loadUser } from "../../Actions/User";
@@ -12,7 +11,6 @@ const NewPost = () => {
 
   const { loading, error, message } = useSelector((state) => state.like);
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -37,15 +35,13 @@ const NewPost = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, error, message, alert]);
+  }, [dispatch, error, message]);
 
   return (
     <div className="newPost">

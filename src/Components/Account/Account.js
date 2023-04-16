@@ -24,7 +24,6 @@ const Account = () => {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
-    alert.success("Logged out successfully");
   };
 
   const deleteProfileHandler = async () => {
@@ -50,7 +49,7 @@ const Account = () => {
       }
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, likeError, message, dispatch]);
+  }, [likeError, message, dispatch]);
 
   return loading === true || userLoading === true ? (
     <Loader />

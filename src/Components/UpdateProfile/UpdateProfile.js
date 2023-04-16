@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./UpdateProfile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser, updateProfile } from "../../Actions/User";
-import { useAlert } from "react-alert";
 import Loader from "../Loader/Loader";
 
 const UpdateProfile = () => {
@@ -21,7 +20,6 @@ const UpdateProfile = () => {
   const [avatarPrev, setAvatarPrev] = useState(user.avatar.url);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -46,20 +44,17 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (updateError) {
-      alert.error(updateError);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
       dispatch({ type: "clearErrors" });
     }
-  }, [dispatch, alert, error, updateError, message]);
+  }, [dispatch, error, updateError, message]);
 
   return loading ? (
     <Loader />

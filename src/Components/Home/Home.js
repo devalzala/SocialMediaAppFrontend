@@ -6,11 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, getFollowingPosts } from "../../Actions/User";
 import Loader from "../Loader/Loader";
 import { Typography } from "@mui/material";
-import { useAlert } from "react-alert";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   // For like and unlike post
   const { error: likeError, message } = useSelector((state) => state.like);
@@ -23,18 +21,17 @@ const Home = () => {
   // To show the like and unlike message
   useEffect(() => {
     if (likeError) {
-      alert.error(likeError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
       if (message == "Post Liked") {
-        alert.success(message);
+        console.log("Post liked");
       } else if (message == "Post Unliked") {
-        alert.error(message);
+        console.log("Post Unliked");
       }
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, likeError, message, dispatch]);
+  }, [likeError, message, dispatch]);
 
   // For post of the following users
   const { loading, posts, error } = useSelector(
@@ -46,7 +43,7 @@ const Home = () => {
     (state) => state.allUsers
   );
 
-  console.log(users, "USERSSSSSs")
+  console.log(users, "USERSSSSSs");
 
   return loading === true || usersLoading === true ? (
     <Loader />

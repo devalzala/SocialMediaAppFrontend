@@ -4,14 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { Typography, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../../Actions/User";
-import { useAlert } from "react-alert";
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const { error, loading, message } = useSelector((state) => state.like);
 
@@ -22,15 +20,13 @@ const UpdatePassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
       dispatch({ type: "clearErrors" });
     }
-  }, [dispatch, alert, error, message]);
+  }, [dispatch, error, message]);
   return (
     <div className="updatePassword">
       <form className="updatePasswordForm" onSubmit={submitHandler}>
